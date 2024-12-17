@@ -1,0 +1,17 @@
+public void filterDoctors(String nameQuery, String departmentQuery, String specializationQuery) {
+    filteredDoctors.clear();
+
+    for (Doctor doctor : doctors) {
+        boolean matchesName = nameQuery.isEmpty() || doctor.getName().toLowerCase().contains(nameQuery);
+        boolean matchesDepartment = departmentQuery == null || departmentQuery.isEmpty()
+                || doctor.getDepartment().equalsIgnoreCase(departmentQuery);
+        boolean matchesSpecialization = specializationQuery == null || specializationQuery.isEmpty()
+                || doctor.getSpecialization().equalsIgnoreCase(specializationQuery);
+
+        // Include the doctor only if all conditions are true
+        if (matchesName && matchesDepartment && matchesSpecialization) {
+            filteredDoctors.add(doctor);
+        }
+    }
+    fireTableDataChanged();
+}
